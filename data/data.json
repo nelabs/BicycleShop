@@ -1,0 +1,56 @@
+[
+    {
+      "id": "1",
+      "name": "Trek Fuel EX 8",
+      "description": "A versatile full-suspension mountain bike with 140mm of travel and a carbon frame.",
+      "star": 3,
+      "price": 2999.99,
+      "discount_percentage": 10,
+      "image": "1.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Giant Defy Advanced Pro 1",
+      "description": "A high-performance road bike with an advanced carbon frame and Shimano Ultegra components.",
+      "star": 4,
+      "price": 3999.99,
+      "discount_percentage": 5,
+      "image": "2.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Specialized Turbo Levo SL Comp Carbon",
+      "description": "An e-mountain bike with a lightweight carbon frame and a motor that amplifies your pedaling power.",
+      "star": 5,
+      "price": 7999.99,
+      "discount_percentage": 0,
+      "image": "3.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Cannondale Topstone Carbon Lefty 3",
+      "description": "A gravel bike with a Lefty Oliver suspension fork and a lightweight carbon frame.",
+      "star": 4,
+      "price": 3499.99,
+      "discount_percentage": 15,
+      "image": "4.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Salsa Cutthroat Carbon GRX 810 Di2",
+      "description": "An adventure bike with a carbon frame, GRX 810 Di2 components, and ample space for bikepacking gear.",
+      "star": 3,
+      "price": 4999.99,
+      "discount_percentage": 7,
+      "image": "5.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Trek GTR 500 D",
+      "description": "An electric adventure bike which has fox fork. Great for mountainbike riding",
+      "star": 5,
+      "price": 6000,
+      "discount_percentage": 20,
+      "image": "6.jpg"
+    }
+]

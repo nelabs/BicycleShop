@@ -1,0 +1,23 @@
+{
+  "name": "bicycleshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "validator": "^13.9.0"
+  }
+}

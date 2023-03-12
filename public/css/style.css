@@ -1,0 +1,29 @@
+span.checked {
+  color: rgb(248, 194, 44)
+}
+
+.bicycle-name:hover {
+  text-decoration: none;
+  color: rgba(243, 27, 27, 0.795);
+}
+
+.overlay-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  width: 60px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: rgba(243, 27, 27, 0.795);
+  color: #fff;
+  z-index: 2;
+}
+
+.card-img-top {
+  object-fit: cover;
+}
+
+.card {
+  min-height: 500px;
+}
