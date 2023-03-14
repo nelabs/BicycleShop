@@ -30,6 +30,9 @@
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
 
 </div>
+<% if (messages.error) { %>
+  <p class="text-danger"><%=messages.error %></p>
+<% } %>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
   </div>

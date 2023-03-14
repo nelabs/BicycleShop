@@ -48,9 +48,22 @@ exports.login = async (req, res) => {
 
 
 exports.loginPage = async (req, res) => {
-  return res.render('login', { page_name: 'Login'});
+  return res.render('login', { page_name: 'Login', message: ''});
+}
+
+exports.membersPage = async (req, res) => {
+  return res.render('members', { page_name: 'Members', message: '', name: 'john' });
 }
 
 exports.registerPage = async (req,res) => {
   return res.render('register', { page_name: 'Register', message: ''});
+}
+
+exports.logoutAction = async (req,res) => {
+  req.logOut((err) => {
+    if (err) { 
+      return next(err); 
+    }
+  });
+  res.redirect('/login');
 }
