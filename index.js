@@ -55,8 +55,11 @@ mongoose.connect('mongodb://0.0.0.0:27017/test').then(() => console.log('Databas
 
 const bicycleRoutes = require('./routes/bicycle');
 const userRoutes = require('./routes/user');
+const commentRoutes = require('./routes/comment');
+
 app.use(bicycleRoutes);
 app.use(userRoutes);
+app.use(commentRoutes);
 
 
 app.set('view engine', 'ejs');

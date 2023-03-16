@@ -5,8 +5,8 @@
 
     <div class="container">
 
-      <div class="row">
-        <div class="col-md-6">
+      
+        
           <div class="card mb-4 box-shadow">
             <% if (bicycle.discount_percentage>0) { %>
             <span class="overlay-text">-<%=bicycle.discount_percentage%>%</span>
@@ -36,9 +36,49 @@
                   <% } %>
                   </s></p> 
                 </div>
+                
               </div>
-            </div>
-          </div>
+              <div>
+                <h4>Write a review</h4>
+                <form method="post" action="/bicycle/<%=bicycle._id %>/postcomment">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Name">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" class="form-control" placeholder="E-mail">
+                  </div>
+                  <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea class="form-control" name="comment" placeholder="Comment"></textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <div>
+                    <label for="rating">Rating</label>
+                  </div>
+                    <div class="wrapper">
+                      <input type="checkbox" name="rating" id="st1" value="1" />
+                      <label for="st1"></label>
+                      <input type="checkbox" name="rating" id="st2" value="2" />
+                      <label for="st2"></label>
+                      <input type="checkbox" name="rating" id="st3" value="3" />
+                      <label for="st3"></label>
+                      <input type="checkbox" name="rating" id="st4" value="4" />
+                      <label for="st4"></label>
+                      <input type="checkbox" name="rating" id="st5" value="5" />
+                      <label for="st5"></label>
+                    </div>          
+           
+                </div>
+                  <input type="hidden" name="bicycleid" value="<%=bicycle._id %>">
+
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            
+        
         </div>
       </div>
     </div>
