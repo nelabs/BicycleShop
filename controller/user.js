@@ -52,7 +52,7 @@ exports.loginPage = async (req, res) => {
 }
 
 exports.membersPage = async (req, res) => {
-  return res.render('members', { page_name: 'Members', message: '', name: 'john' });
+  return res.render('members', { page_name: 'Members', message: '', name: 'john' }); // need update name
 }
 
 exports.registerPage = async (req,res) => {

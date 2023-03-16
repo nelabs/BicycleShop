@@ -8,7 +8,7 @@ const { postComment } = require('../controller/comment');
 
 router.post('/bicycle', storeBicycle);
 
-router.post('/bicycle/:id/postcomment', postComment);
+router.post('/bicycle/:id', postComment);
 
 router.get('/bicycles', fetchAllBicyclesAPI);
 
