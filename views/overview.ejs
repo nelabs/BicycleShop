@@ -27,7 +27,8 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="card-text text-center mx-auto">
                   <p><% if(bicycle.discount_percentage > 0) { %>
-                    <%= bicycle.price * (100 - bicycle.discount_percentage) / 100 %>
+                    <% const newprice = bicycle.price * (100 - bicycle.discount_percentage) / 100 %>
+                    <%=newprice.toFixed(2)%>
                  <% } else { %> 
                  <%=bicycle.price %>
                   <% } %> <s class="text-muted small">
@@ -45,21 +46,30 @@
               <% } %></h4> 
                 <% for (let comment of comments) { %>
                   <div> 
-                    <p>
-                      <b><%=comment.name%></b>
+                    <div class="comment-header">
+                      <h6 class="comment-name"><%=comment.name%></h6>
                       <% const formattedDate = new Date(comment.createdAt).toLocaleDateString(); %>
                       <% const hours = new Date(comment.createdAt).getHours(); %>
                       <% const minutes = new Date(comment.createdAt).getMinutes().toString().padStart(2,'0'); %>
-                      <small>(<%=formattedDate%>
-                        <%=hours%>:<%=minutes%>)
-                      </small>
-                    </p>
+                      
+                      <div class="comment-rating">
+                        <% for (let index = 0; index < comment.rating; index++) { %>
+                          <span class="fa fa-star checked"></span>
+                        <% } %>
+                        <% for (let index = 0; index < 5 - comment.rating; index++) { %>
+                          <span class="fa fa-star"></span>
+                        <% } %>
+                      </div>
+                      <span class="comment-date text-secondary small">Reviewed on <%=formattedDate%>
+                        <%=hours%>:<%=minutes%>
+                      </span>
+                    </div>
+                    <div class="comment-body">
                     <p>
                       <%=comment.comment%>
                     </p>
-                    <p>
-                      Rating: <%=comment.rating%>
-                    </p>
+                  </div>
+                    
                   </div>
                   <% } %>
               </div>

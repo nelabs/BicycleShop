@@ -71,7 +71,7 @@ span.checked {
   font-size: 14px;
   margin: -10px 0px;
   left: 1%
-  transform: translateX(-50%);
+  
 }
 
 .wrapper input {
@@ -113,4 +113,8 @@ span.checked {
 
 .wrapper label:hover:before {
   color: #FFC107;
+}
+
+.comment-rating {
+  margin: -5px 0px 0px 0px
 }

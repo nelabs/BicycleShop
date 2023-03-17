@@ -36,12 +36,38 @@ exports.fetchAllBicyclesWEB = async (req,res) => {
     });
   }
 }
+// calculate average rating from all reviews summarized on bicycleid property
+async function getAverageRating(bicycleid) {
+  const pipeline = [
+    {
+      $match: {
+        bicycleid: bicycleid
+      }
+    },
+    {
+      $group: {
+        _id: "$bicycleid",
+        averageRating: { $avg: "$rating" }
+      }
+    }
+  ];
+  const result = Comment.aggregate(pipeline)
+
+  
+  var avgRating = result;
+  return avgRating;
+ 
+}
 
 exports.fetchOneBicycleWEB = async (req,res) => {
   try {
+    const avgrating = await getAverageRating(req.params.id);
+    const avgratingtopass = avgrating[0].averageRating.toFixed(0);
+    // console.log(avgratingtopass); pass to overview page :)
+
     const bicycle = await Bicycle.findById(req.params.id);
     const comments = await Comment.find({bicycleid: req.params.id});
-    return res.render('overview', { bicycle, comments })
+    return res.render('overview', { bicycle, comments, avgratingtopass })
   }
   catch (e) {
     return res.status(404).json({ 
