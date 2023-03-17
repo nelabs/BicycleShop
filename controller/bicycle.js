@@ -1,4 +1,5 @@
 const Bicycle = require('../model/Bicycle');
+const Comment = require('../model/Comment');
 
 exports.storeBicycle = async (req,res) => {
   try {
@@ -39,7 +40,8 @@ exports.fetchAllBicyclesWEB = async (req,res) => {
 exports.fetchOneBicycleWEB = async (req,res) => {
   try {
     const bicycle = await Bicycle.findById(req.params.id);
-    return res.render('overview', { bicycle })
+    const comments = await Comment.find({bicycleid: req.params.id});
+    return res.render('overview', { bicycle, comments })
   }
   catch (e) {
     return res.status(404).json({ 

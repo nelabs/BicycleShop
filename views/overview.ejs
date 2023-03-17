@@ -39,6 +39,31 @@
                 
               </div>
               <div>
+                <h4>Reviews
+                <% if (comments.length >0) { %>
+                (<%=comments.length%>)
+              <% } %></h4> 
+                <% for (let comment of comments) { %>
+                  <div> 
+                    <p>
+                      <b><%=comment.name%></b>
+                      <% const formattedDate = new Date(comment.createdAt).toLocaleDateString(); %>
+                      <% const hours = new Date(comment.createdAt).getHours(); %>
+                      <% const minutes = new Date(comment.createdAt).getMinutes().toString().padStart(2,'0'); %>
+                      <small>(<%=formattedDate%>
+                        <%=hours%>:<%=minutes%>)
+                      </small>
+                    </p>
+                    <p>
+                      <%=comment.comment%>
+                    </p>
+                    <p>
+                      Rating: <%=comment.rating%>
+                    </p>
+                  </div>
+                  <% } %>
+              </div>
+              <div>
                 <h4>Write a review</h4>
                 <form method="post" action="/bicycle/<%=bicycle._id %>">
                   <div class="form-group">

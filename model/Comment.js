@@ -15,6 +15,10 @@ const commentSchema = new mongoose.Schema({
   rating: {
     type: Number
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
   bicycleid: {
     type: String
   }
