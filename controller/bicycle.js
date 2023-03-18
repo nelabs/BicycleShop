@@ -51,9 +51,12 @@ async function getAverageRating(bicycleid) {
       }
     }
   ];
-  const result = Comment.aggregate(pipeline)
+  const result = await Comment.aggregate(pipeline)
 
-  
+  if (result.length === 0) {
+    return null;
+  }
+
   var avgRating = result;
   return avgRating;
  
@@ -61,8 +64,12 @@ async function getAverageRating(bicycleid) {
 
 exports.fetchOneBicycleWEB = async (req,res) => {
   try {
-    const avgrating = await getAverageRating(req.params.id);
-    const avgratingtopass = avgrating[0].averageRating.toFixed(0);
+     const avgrating = await getAverageRating(req.params.id);
+
+    let avgratingtopass = null;
+    if (avgrating && avgrating.length > 0) {
+      avgratingtopass = avgrating[0].averageRating.toFixed(0);
+    }
     // console.log(avgratingtopass); pass to overview page :)
 
     const bicycle = await Bicycle.findById(req.params.id);

@@ -17,12 +17,14 @@
                 <a href="./bicycle?id=0"><%=bicycle.name%></a>
               </h5>
               <p class="card-text text-center"><%=bicycle.description%></p>
+              
               <div class="bicycle-rating text-center">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
+                <% for (let index = 0; index < avgratingtopass; index++) { %>
+                  <span class="fa fa-star checked"></span>
+                <% } %>
+                <% for (let index = 0; index < 5 - avgratingtopass; index++) { %>
+                  <span class="fa fa-star"></span>
+                <% } %>
               </div>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="card-text text-center mx-auto">
@@ -94,16 +96,16 @@
                     <label for="rating">Rating</label>
                   </div>
                     <div class="wrapper">
-                      <input type="checkbox" name="rating" id="st1" value="1" />
-                      <label for="st1"></label>
-                      <input type="checkbox" name="rating" id="st2" value="2" />
-                      <label for="st2"></label>
-                      <input type="checkbox" name="rating" id="st3" value="3" />
-                      <label for="st3"></label>
-                      <input type="checkbox" name="rating" id="st4" value="4" />
-                      <label for="st4"></label>
                       <input type="checkbox" name="rating" id="st5" value="5" />
                       <label for="st5"></label>
+                      <input type="checkbox" name="rating" id="st4" value="4" />
+                      <label for="st4"></label>
+                      <input type="checkbox" name="rating" id="st3" value="3" />
+                      <label for="st3"></label>
+                      <input type="checkbox" name="rating" id="st2" value="2" />
+                      <label for="st2"></label>
+                      <input type="checkbox" name="rating" id="st1" value="1" />
+                      <label for="st1"></label>
                     </div>          
            
                 </div>
