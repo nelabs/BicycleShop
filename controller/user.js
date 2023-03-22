@@ -1,5 +1,6 @@
 const User = require('../model/User');
 const bcrypt = require('bcryptjs');
+const Bicycle = require('../model/Bicycle');
 
 
 
@@ -52,7 +53,26 @@ exports.loginPage = async (req, res) => {
 }
 
 exports.membersPage = async (req, res) => {
+  console.log(req.body);
   return res.render('members', { page_name: 'Members', message: '', name: 'john' }); // need update name
+}
+
+exports.membersCategoriesPage = async (req, res) => {
+
+    return res.render('membersCategories');
+  
+}
+
+exports.membersPostsPage = async (req, res) => {
+  try {
+    const bicycles = await Bicycle.find({});
+    return res.render('membersPosts', { bicycles })
+  }
+  catch (e) {
+    return res.render('membersPosts', {
+      bicycles      
+    });
+  }
 }
 
 exports.registerPage = async (req,res) => {

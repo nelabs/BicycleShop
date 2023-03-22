@@ -4,7 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 
-const { storeUser, login, loginPage, membersPage, registerPage, logoutAction } = require('../controller/user');
+const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCategoriesPage, registerPage, logoutAction } = require('../controller/user');
 
 router.post('/user', storeUser);
 
@@ -50,11 +50,29 @@ function checkNotAuthenticated(req, res, next) {
 
 }
 
-router.post('/login', passport.authenticate('local', {successRedirect: '/members', failureRedirect:'/login', failureFlash: true}));
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/members', 
+  failureRedirect:'/login', 
+  failureFlash: true
+  })
+);
+
+router.use('/members', function(req, res, next) {
+  if (req.isAuthenticated()) {
+    res.locals.username = req.body.email;
+    console.log(req); // Add this line
+    return next();
+  }
+  res.redirect('/login');
+});
 
 router.get('/login', checkNotAuthenticated, loginPage);
 
 router.get('/members', checkAuthenticated, membersPage);
+
+router.get('/members/posts', checkAuthenticated, membersPostsPage);
+
+router.get('/members/categories', checkAuthenticated, membersCategoriesPage);
 
 router.delete('/logout', logoutAction);
 
