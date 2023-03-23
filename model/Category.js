@@ -3,11 +3,15 @@ const validator = require('validator');
 
 
 const categorySchema = new mongoose.Schema({
-  name: {
+  category: {
     type: String
   },
   description: {
     type: String
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 })
 

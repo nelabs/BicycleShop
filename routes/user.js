@@ -4,7 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 
-const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCategoriesPage, registerPage, logoutAction } = require('../controller/user');
+const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCategoriesPage, categoriesPost, registerPage, logoutAction } = require('../controller/user');
 
 router.post('/user', storeUser);
 
@@ -60,7 +60,7 @@ router.post('/login', passport.authenticate('local', {
 router.use('/members', function(req, res, next) {
   if (req.isAuthenticated()) {
     res.locals.username = req.body.email;
-    console.log(req); // Add this line
+    console.log(req.body); // Add this line
     return next();
   }
   res.redirect('/login');
@@ -73,6 +73,8 @@ router.get('/members', checkAuthenticated, membersPage);
 router.get('/members/posts', checkAuthenticated, membersPostsPage);
 
 router.get('/members/categories', checkAuthenticated, membersCategoriesPage);
+
+router.post('/members/categories', checkAuthenticated, categoriesPost);
 
 router.delete('/logout', logoutAction);
 

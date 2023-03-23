@@ -1,6 +1,7 @@
 const User = require('../model/User');
 const bcrypt = require('bcryptjs');
 const Bicycle = require('../model/Bicycle');
+const Category = require('../model/Category');
 
 
 
@@ -61,6 +62,20 @@ exports.membersCategoriesPage = async (req, res) => {
 
     return res.render('membersCategories');
   
+}
+
+exports.categoriesPost = async (req,res) => {
+  try {
+    const category = new Category(req.body);
+    await category.save();
+    console.log(req.body);
+    return res.status(201).json({success:true})
+
+  }
+  catch (e) {
+    return res.render('membersCategories', { success : false, message: e.message });
+
+  }
 }
 
 exports.membersPostsPage = async (req, res) => {
