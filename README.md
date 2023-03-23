@@ -8,5 +8,8 @@ Simple bicycle store with content management system
 
 TODO:
 
-fetch all comments under the bike
-error: stars if selected more than 1 then submitting array
+fetch all comments under the bike (done)
+error: stars if selected more than 1 then submitting array (done)
+
+create advanced realtionship between category and items
+rename bicycle to item
