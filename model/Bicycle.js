@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const Category = require('./Category');
+
+const categorySchema = mongoose.model('Category').schema;
+
+
 
 //TODO: add data validation
 //npm i validator
@@ -12,13 +17,7 @@ const bicycleSchema = new mongoose.Schema( {
     type: String,
     minlength: 3,
     maxlength: 100,
-    require: true,
-    validate: {
-      validator: function(value) {
-        return validator.isAlpha(value);
-      },
-      message: 'Name can only contain letters'
-    }
+    require: true
   },
   description: {
     type: String
@@ -31,6 +30,7 @@ const bicycleSchema = new mongoose.Schema( {
       }
     }
   },
+  category: categorySchema,
   price: {
     type: Number
   },

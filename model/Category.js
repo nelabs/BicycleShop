@@ -12,7 +12,11 @@ const categorySchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  items: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Bicycle'
+  }]
 })
 
 const Category = mongoose.model('Category', categorySchema);

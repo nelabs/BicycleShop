@@ -10,7 +10,7 @@ exports.storeBicycle = async (req,res) => {
     return res.status(201).json({ success: true, bicycle});
   }
   catch(e) {
-    console.log(colors.red.underline(e.message));
+    console.log(e.message);
     return res.status(400).json({ success : false, message: e.message })
   }
 }
@@ -109,8 +109,9 @@ exports.updateBicycle = async (req,res) => {
 
 exports.deleteBicycle = async (req,res) => {
   try {
-  const bicycle = await Bicycle.findByIdAndDelete(req.params.id);
-  return res.status(201).json({success: true, bicycle});
+    const bicycle = await Bicycle.findByIdAndDelete(req.params.id);
+    req.flash('success', 'Item deleted successfully');
+    return res.redirect('/members/posts');
   }
   catch (e) {
     return res.status(400).json({ success: false, message: e.message})

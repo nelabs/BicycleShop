@@ -81,7 +81,7 @@ exports.categoriesPost = async (req,res) => {
 exports.membersPostsPage = async (req, res) => {
   try {
     const bicycles = await Bicycle.find({});
-    return res.render('membersPosts', { bicycles })
+    return res.render('membersPosts', { bicycles, message: '' })
   }
   catch (e) {
     return res.render('membersPosts', {

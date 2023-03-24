@@ -11,5 +11,7 @@ TODO:
 fetch all comments under the bike (done)
 error: stars if selected more than 1 then submitting array (done)
 
-create advanced realtionship between category and items
+create advanced realtionship between category and items (partially done)
 rename bicycle to item
+
+express flash doesn't work when deleting post
