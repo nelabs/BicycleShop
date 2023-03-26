@@ -15,6 +15,32 @@ exports.storeBicycle = async (req,res) => {
   }
 }
 
+exports.editBicycleWeb = async (req,res) => {
+  try {
+    const bicycle = await Bicycle.findById(req.params.id);
+
+    return res.render('membersEditItem', { bicycle })
+  }
+  catch(e) {
+    console.log(e.message);
+    return res.status(400).json({ success : false, message: e.message })
+  }
+}
+exports.editBicycle = async (req,res) => {
+  try {
+    const bicycle = await Bicycle.findByIdAndUpdate(req.params.id, req.body,{
+      new: true,
+      runValidators: true
+    });
+
+    return res.render('membersEditItem', { bicycle })
+  }
+  catch(e) {
+    console.log(e.message);
+    return res.status(400).json({ success : false, message: e.message })
+  }
+}
+
 exports.fetchAllBicyclesAPI = async (req,res) => {
   try {
     const bicycles = await Bicycle.find({});

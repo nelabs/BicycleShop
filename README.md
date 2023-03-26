@@ -15,3 +15,4 @@ create advanced realtionship between category and items (partially done)
 rename bicycle to item
 
 express flash doesn't work when deleting post
+need to convert post into patch
