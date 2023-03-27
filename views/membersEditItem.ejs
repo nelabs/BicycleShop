@@ -5,11 +5,11 @@
   <%- include('./partials/adminnavigation.ejs') %>
 
   <div class="container mt-1">
-    <form action="/members/posts/<%=bicycle.id%>" method="post">
-      
+    <form id="edit-post-form">
+      <input type="hidden" name="_id" value="<%=bicycle._id%>">
       <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control" name="category" value="<%=bicycle.name%>">
+        <input type="text" class="form-control" name="name" value="<%=bicycle.name%>">
       </div>
       <div class="form-group">
         <label>Description</label>
@@ -17,11 +17,11 @@
       </div>
       <div class="form-group">
         <label>Price</label>
-        <input type="text" class="form-control" name="Price" value="<%=bicycle.price%>">
+        <input type="text" class="form-control" name="price" value="<%=bicycle.price%>">
       </div>
       <div class="form-group">
         <label>Discount</label>
-        <input type="text" class="form-control" name="Discount" value="<%=bicycle.discount_percentage%>">
+        <input type="text" class="form-control" name="discount_percentage" value="<%=bicycle.discount_percentage%>">
       </div>
       <div style="float:left">
       <button style="display: inline" type="submit" class="btn btn-primary">Update item</button>           
@@ -32,5 +32,6 @@
     </div>
   </div>
 
+  <script src="/js/script.js"></script>
 </body>
 </html>

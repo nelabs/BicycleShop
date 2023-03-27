@@ -82,7 +82,7 @@ router.delete('/members/posts/:id', deleteBicycle);
 
 router.get('/members/posts/:id', editBicycleWeb);
 
-router.patch('/members/posts/:id', editBicycle);
+router.patch('/members/posts/:id', checkAuthenticated, editBicycle);
 
 router.delete('/logout', logoutAction);
 
