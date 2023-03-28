@@ -1,5 +1,6 @@
 const Bicycle = require('../model/Bicycle');
 const Comment = require('../model/Comment');
+const Category = require('../model/Category');
 
 exports.storeBicycle = async (req,res) => {
   try {
@@ -18,8 +19,9 @@ exports.storeBicycle = async (req,res) => {
 exports.editBicycleWeb = async (req,res) => {
   try {
     const bicycle = await Bicycle.findById(req.params.id);
-
-    return res.render('membersEditItem', { bicycle })
+    const categories = await Category.find({});
+    // console.log(category);
+    return res.render('membersEditItem', { bicycle, categories })
   }
   catch(e) {
     console.log(e.message);
@@ -28,7 +30,17 @@ exports.editBicycleWeb = async (req,res) => {
 }
 exports.editBicycle = async (req,res) => {
   try {
-    const bicycle = await Bicycle.findByIdAndUpdate(req.params.id, req.body,{
+    const bicycle = await Bicycle.findByIdAndUpdate(req.params.id, 
+      {
+        $set: {
+          "category.category": req.body.category,
+        },
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        discount_percentage: req.body.discount_percentage
+      },
+      {
       new: true,
       runValidators: true
     });
