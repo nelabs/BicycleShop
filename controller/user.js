@@ -59,8 +59,9 @@ exports.membersPage = async (req, res) => {
 }
 
 exports.membersCategoriesPage = async (req, res) => {
-
-    return res.render('membersCategories');
+    const categories = await Category.find({});
+    const flashMsg = req.flash('success');
+    return res.render('membersCategories', { categories, flashMsg });
   
 }
 
@@ -75,6 +76,17 @@ exports.categoriesPost = async (req,res) => {
   catch (e) {
     return res.render('membersCategories', { success : false, message: e.message });
 
+  }
+}
+
+exports.categoriesDelete = async (req,res) => {
+  try {
+    const category = await Category.findByIdAndDelete(req.params.id);
+    req.flash('success', 'Category deleted successfully');
+    return res.redirect('/members/categories');
+  }
+  catch (e) {
+    return res.status(400).json({ success: false, message: e.message})
   }
 }
 

@@ -17,4 +17,6 @@ rename bicycle to item
 express flash doesn't work when deleting post
 need to convert post into patch (done)
 
-need to pass in categoriese when update item
+need to pass in categoriese when update item (done)
+
+repair flash message un update category event
