@@ -67,8 +67,9 @@ exports.membersCategoriesPage = async (req, res) => {
 }
 
 exports.categoriesPost = async (req,res,done) => {
-  console.log(req.body);
-  if (!req.body.category || !req.body.description) {
+  // console.log(req.body);
+  const {category, description} = req.body;
+  if (!category || !description) {
     req.flash('error', 'Category name and description required');
     const categories = await Category.find({});
     return res.render('membersCategories', { categories })

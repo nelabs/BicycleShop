@@ -45,7 +45,8 @@ exports.editBicycle = async (req,res) => {
       runValidators: true
     });
     const categories = await Category.find({});
-    
+    req.flash('success', 'Item has been updated successfully');
+
     return res.render('membersEditItem', { bicycle, categories })
   }
   catch(e) {

@@ -9,6 +9,8 @@ $('#edit-post-form').submit(function(event) {
     success: function(response) {
       // handle success response
       console.log(postId);
+      $('#success-message').toggle();
+      $('#success-message').html('Item has been updated successfully!');
 
     },
     error: function(error) {
