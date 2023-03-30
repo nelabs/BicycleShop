@@ -62,7 +62,7 @@ router.post('/login', passport.authenticate('local', {
 router.use('/members', function(req, res, next) {
   if (req.isAuthenticated()) {
     res.locals.username = req.body.email;
-    console.log(req.body); // Add this line
+    // console.log(req.body); // Add this line
     return next();
   }
   res.redirect('/login');

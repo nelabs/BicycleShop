@@ -60,17 +60,31 @@ exports.membersPage = async (req, res) => {
 
 exports.membersCategoriesPage = async (req, res) => {
     const categories = await Category.find({});
-    const flashMsg = req.flash('success');
-    return res.render('membersCategories', { categories, flashMsg });
+    // const flashMsg = req.flash('success');
+    // const flashMsg = null;
+    return res.render('membersCategories', { categories });
   
 }
 
-exports.categoriesPost = async (req,res) => {
+exports.categoriesPost = async (req,res,done) => {
+  console.log(req.body);
+  if (!req.body.category || !req.body.description) {
+    req.flash('error', 'Category name and description required');
+    const categories = await Category.find({});
+    return res.render('membersCategories', { categories })
+ 
+  }
   try {
+   
     const category = new Category(req.body);
     await category.save();
-    console.log(req.body);
-    return res.status(201).json({success:true})
+    const categories = await Category.find({});
+
+    req.flash('success', 'Category has been added successfully');
+    // console.log(req.body);
+    return res.render('membersCategories', { categories })
+
+    // return res.status(201).json({success:true})
 
   }
   catch (e) {

@@ -4,10 +4,12 @@ const validator = require('validator');
 
 const categorySchema = new mongoose.Schema({
   category: {
-    type: String
+    type: String,
+    require: true
   },
   description: {
-    type: String
+    type: String,
+    require: true
   },
   createdAt: {
     type: Date,
