@@ -1,0 +1,63 @@
+
+<%- include('./partials/header.ejs') %>
+<body>
+  
+  <%- include('./partials/adminnavigation.ejs') %>
+
+  
+
+  <div class="container mt-1">
+    <h3>Comments</h3>
+    <% bicycles.forEach(bicycle => { %>
+      <h5><%= bicycle.name %></h5>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Comment</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% var i=1 %>
+        <% comments.forEach(comment => {
+          if (comment.bicycleid == bicycle._id) { %>
+      
+      <div class="col-md-4">
+           <p></p> 
+      </div>
+    
+          <tr>
+            <th scope="row"><%=i%></th>
+            <td><a href="/members/comment/<%=comment._id%>" class="bicycle-name"><%=comment.name %>
+              (<%=comment.email %>)</a></td>
+            <td><%=comment.comment%></td>
+            <td>
+              <div style="float:left">
+              
+                <form style="display: inline" method="post" action="/members/comment/<%=comment._id%>?_method=DELETE"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form>
+              </div>
+            </td>
+          </tr>
+          <tr>
+      <% i++; %>
+     
+  <% } 
+   }) %>
+  </tbody>
+  </table>
+
+  <% }) %>
+
+  <% if (messages.success) { %>
+  <div class="alert alert-success"><%=messages.success%></div>
+  <% } %>
+  <% if (messages.error) { %>
+    <div class="alert alert-danger"><%=messages.error%></div>
+  <% } %>
+  
+  </div>
+
+</body>
+</html>

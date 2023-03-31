@@ -2,6 +2,7 @@ const User = require('../model/User');
 const bcrypt = require('bcryptjs');
 const Bicycle = require('../model/Bicycle');
 const Category = require('../model/Category');
+const Comment = require('../model/Comment');
 
 
 
@@ -103,6 +104,16 @@ exports.categoriesDelete = async (req,res) => {
   catch (e) {
     return res.status(400).json({ success: false, message: e.message})
   }
+}
+exports.membersCommentsPage = async (req, res) => {
+  const bicycles = await Bicycle.find({});
+  const comments = await Comment.find({});
+
+  // const flashMsg = req.flash('success');
+  // const flashMsg = null;
+  // console.log(comments);
+  return res.render('membersComments', { bicycles, comments });
+
 }
 
 exports.membersPostsPage = async (req, res) => {
