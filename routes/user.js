@@ -4,7 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 
-const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCommentsPage, membersCategoriesPage, categoriesPost, categoriesDelete, registerPage, logoutAction } = require('../controller/user');
+const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCommentsPage, membersCategoriesPage, membersUsersPage, categoriesPost, categoriesDelete, registerPage, logoutAction, membersAddItemPage, membersAddItem } = require('../controller/user');
 
 const { deleteBicycle, editBicycleWeb, editBicycle } = require('../controller/bicycle');
 
@@ -86,9 +86,16 @@ router.get('/members/comments', checkAuthenticated, membersCommentsPage);
 
 router.delete('/members/comments/:id', checkAuthenticated, deleteComment);
 
+router.get('/members/users', checkAuthenticated, membersUsersPage);
+
 router.delete('/members/posts/:id', deleteBicycle);
 
+router.get('/members/posts/add', membersAddItemPage);
+
+router.post('/members/posts/add', membersAddItem);
+
 router.get('/members/posts/:id', editBicycleWeb);
+
 
 router.patch('/members/posts/:id', checkAuthenticated, editBicycle);
 

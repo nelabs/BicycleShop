@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const Bicycle = require('../model/Bicycle');
 const Category = require('../model/Category');
 const Comment = require('../model/Comment');
+const mongoose = require('mongoose');
 
 
 
@@ -67,6 +68,11 @@ exports.membersCategoriesPage = async (req, res) => {
   
 }
 
+exports.membersUsersPage = async (req,res) => {
+  const users = await User.find({});
+  return res.render('membersUsers', { users });
+}
+
 exports.categoriesPost = async (req,res,done) => {
   // console.log(req.body);
   const {category, description} = req.body;
@@ -127,6 +133,59 @@ exports.membersPostsPage = async (req, res) => {
       bicycles      
     });
   }
+}
+exports.membersAddItemPage = async (req, res) => {
+  const categories = await Category.find({});
+
+  return res.render('membersAddItem', { categories });
+
+}
+
+exports.membersAddItem = async (req, res) => {
+  const {name, description} = req.body;
+  console.log(req.body);
+  if (!name || !description) {
+    req.flash('error', 'Item name and description required');
+    const categories = await Category.find({});
+    return res.render('membersAddItem', { categories })
+ 
+  }
+  try {
+   
+    // const bicycle = new Bicycle(req.body);
+    const bicycle = new Bicycle( 
+      {
+        _id: new mongoose.Types.ObjectId(),
+        category: {
+          category: req.body.category,
+        },
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        discount_percentage: req.body.discount_percentage
+      },
+      {
+      new: true,
+      runValidators: true
+    });
+    
+
+    await bicycle.save();
+    const categories = await Category.find({});
+
+    req.flash('success', 'Item has been added successfully');
+    // console.log(req.body);
+    return res.render('membersAddItem', { categories })
+
+    // return res.status(201).json({success:true})
+
+  }
+  catch (e) {
+    // return res.render('membersAddItem', { categories, success : false, message: e.message });
+    return res.status(400).json({ success: false, message: e.message})
+
+  }
+
 }
 
 exports.registerPage = async (req,res) => {
