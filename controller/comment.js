@@ -15,3 +15,14 @@ exports.postComment = async (req,res) => {
   }
   
 }
+
+exports.deleteComment = async (req,res) => {
+  try {
+    const category = await Comment.findByIdAndDelete(req.params.id);
+    req.flash('success', 'Comment deleted successfully');
+    return res.redirect('/members/comments#alert');
+  }
+  catch (e) {
+    return res.status(400).json({ success: false, message: e.message})
+  }
+}

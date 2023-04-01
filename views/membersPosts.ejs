@@ -11,6 +11,7 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Name</th>
+        <th scope="col">Category</th>
         <th scope="col">Price</th>
         <th scope="col">Edit</th>
       </tr>
@@ -26,6 +27,11 @@
         <tr>
           <th scope="row"><%=i%></th>
           <td><a href="/members/posts/<%=bicycle._id%>" class="bicycle-name"><%=bicycle.name%></a></td>
+          <% const cat = bicycle.category ?? '' %>
+          <td>
+            <%=cat.category %>
+      
+          </td>
           <td><%=bicycle.price%></td>
           <td>
             <div style="float:left">

@@ -31,12 +31,18 @@
           <tr>
             <th scope="row"><%=i%></th>
             <td><a href="/members/comment/<%=comment._id%>" class="bicycle-name"><%=comment.name %>
-              (<%=comment.email %>)</a></td>
+              (<%=comment.email %>)</a>
+              <% const formattedDate = new Date(comment.createdAt).toLocaleDateString(); %>
+              <% const hours = new Date(comment.createdAt).getHours(); %>
+              <% const minutes = new Date(comment.createdAt).getMinutes().toString().padStart(2,'0'); %>
+              <small class="text-muted"><%=formattedDate%></small>
+            
+            </td>
             <td><%=comment.comment%></td>
             <td>
               <div style="float:left">
               
-                <form style="display: inline" method="post" action="/members/comment/<%=comment._id%>?_method=DELETE"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form>
+                <form style="display: inline" method="post" action="/members/comments/<%=comment._id%>?_method=DELETE"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form>
               </div>
             </td>
           </tr>
@@ -51,10 +57,10 @@
   <% }) %>
 
   <% if (messages.success) { %>
-  <div class="alert alert-success"><%=messages.success%></div>
+  <div class="alert alert-success" id="alert"><%=messages.success%></div>
   <% } %>
   <% if (messages.error) { %>
-    <div class="alert alert-danger"><%=messages.error%></div>
+    <div class="alert alert-danger" id="alert"><%=messages.error%></div>
   <% } %>
   
   </div>

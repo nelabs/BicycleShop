@@ -8,6 +8,8 @@ const { storeUser, login, loginPage, membersPage, membersPostsPage, membersComme
 
 const { deleteBicycle, editBicycleWeb, editBicycle } = require('../controller/bicycle');
 
+const { deleteComment } = require('../controller/comment');
+
 router.post('/user', storeUser);
 
 // passport.use(new LocalStrategy(async (email,password,done) => {
@@ -81,6 +83,8 @@ router.post('/members/categories', checkAuthenticated, categoriesPost);
 router.delete('/members/categories/:id', checkAuthenticated, categoriesDelete);
 
 router.get('/members/comments', checkAuthenticated, membersCommentsPage);
+
+router.delete('/members/comments/:id', checkAuthenticated, deleteComment);
 
 router.delete('/members/posts/:id', deleteBicycle);
 
