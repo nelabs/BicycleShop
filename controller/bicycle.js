@@ -152,6 +152,7 @@ exports.deleteBicycle = async (req,res) => {
     const bicycle = await Bicycle.findByIdAndDelete(req.params.id);
     req.flash('success', 'Item deleted successfully');
     return res.redirect('/members/posts');
+
   }
   catch (e) {
     return res.status(400).json({ success: false, message: e.message})

@@ -143,7 +143,7 @@ exports.membersAddItemPage = async (req, res) => {
 
 exports.membersAddItem = async (req, res) => {
   const {name, description} = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   if (!name || !description) {
     req.flash('error', 'Item name and description required');
     const categories = await Category.find({});
