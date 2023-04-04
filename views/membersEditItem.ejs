@@ -13,9 +13,15 @@
       </div>
       <div class="form-group">
         <label>Category</label>
+        
         <select name="category" class="form-control">
           <% for (let category of categories) { %>
-          <option value="<%=category.category%>"><%=category.category%></option>
+          <option value="<%=category.category%>"
+            <% const cat = bicycle.category%>
+            <% if (category.category == cat.category) { %>
+            selected
+           <% } %>
+            ><%=category.category%></option>
             <% } %>
         </select>
       </div>

@@ -5,7 +5,7 @@
   <%- include('./partials/adminnavigation.ejs') %>
 
   <div class="container mt-1">
-    <form action="/members/posts/add" method="post">
+    <form action="/members/posts/add" method="post" enctype="multipart/form-data">
 
       <div class="form-group">
         <label>Item name</label>
@@ -31,14 +31,18 @@
         <label>Discount</label>
         <input type="text" class="form-control" name="discount_percentage" placeholder="Discount">
       </div>
-   
+      <div class="form-group">
+        <label>Image</label>
+        <input type="file" class="form-control" id="formFile" name="upload">
+      </div>
+
       <% if (messages.success) { %>
         <div class="alert alert-success"><%=messages.success%></div>
         <% } %>
         <% if (messages.error) { %>
           <div class="alert alert-danger"><%=messages.error%></div>
         <% } %>
-        
+
       <div style="float:left">
       <button style="display: inline" type="submit" class="btn btn-primary">Add item</button>           
    

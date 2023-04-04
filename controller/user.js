@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 
 
+
 exports.storeUser = async (req,res) => {
   try {
     // req.body.password = await bcrypt.hash(req.body.password, 8);
@@ -140,6 +141,7 @@ exports.membersAddItemPage = async (req, res) => {
   return res.render('membersAddItem', { categories });
 
 }
+
 
 exports.membersAddItem = async (req, res) => {
   const {name, description} = req.body;

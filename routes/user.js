@@ -2,13 +2,15 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-
+const multer = require('multer');
 
 const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCommentsPage, membersCategoriesPage, membersUsersPage, categoriesPost, categoriesDelete, registerPage, logoutAction, membersAddItemPage, membersAddItem } = require('../controller/user');
 
 const { deleteBicycle, editBicycleWeb, editBicycle } = require('../controller/bicycle');
 
 const { deleteComment } = require('../controller/comment');
+
+
 
 router.post('/user', storeUser);
 
@@ -92,7 +94,11 @@ router.delete('/members/posts/:id', deleteBicycle);
 
 router.get('/members/posts/add', membersAddItemPage);
 
-router.post('/members/posts/add', membersAddItem);
+const upload = multer({
+  dest: 'images'
+})
+
+router.post('/members/posts/add', upload.single('upload'),membersAddItem);
 
 router.get('/members/posts/:id', editBicycleWeb);
 

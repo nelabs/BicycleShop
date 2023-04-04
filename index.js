@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const colors = require('colors');
 const User = require('./model/User');
+const multer = require('multer');
 
 const session = require('express-session');
 const methodOverride = require('method-override');
