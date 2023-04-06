@@ -4,6 +4,7 @@ const Bicycle = require('../model/Bicycle');
 const Category = require('../model/Category');
 const Comment = require('../model/Comment');
 const mongoose = require('mongoose');
+const sharp = require('sharp');
 
 
 
@@ -154,7 +155,10 @@ exports.membersAddItem = async (req, res) => {
   }
   try {
    
-    // const bicycle = new Bicycle(req.body);
+    // const bicycle = new Bicycle(req.body);\
+    const buffer = await sharp(req.file.buffer).resize(800, 800, { fit: 'inside', withoutEnlargement: true }).png().toBuffer();
+
+
     const bicycle = new Bicycle( 
       {
         _id: new mongoose.Types.ObjectId(),
@@ -164,7 +168,8 @@ exports.membersAddItem = async (req, res) => {
         name: req.body.name,
         description: req.body.description,
         price: req.body.price,
-        discount_percentage: req.body.discount_percentage
+        discount_percentage: req.body.discount_percentage,
+        image: buffer
       },
       {
       new: true,
@@ -176,7 +181,7 @@ exports.membersAddItem = async (req, res) => {
     const categories = await Category.find({});
 
     req.flash('success', 'Item has been added successfully');
-    // console.log(req.body);
+    console.log(req.body);
     return res.render('membersAddItem', { categories })
 
     // return res.status(201).json({success:true})
@@ -188,6 +193,21 @@ exports.membersAddItem = async (req, res) => {
 
   }
 
+}
+
+exports.getImage = async (req,res) => {
+  try {
+    const bicycle = await Bicycle.findById(req.params.id)
+
+    if (!bicycle || !bicycle.image) {
+      throw new Error()
+    }
+    res.set('Content-Type', 'image/png')
+    res.send(bicycle.image);
+
+  } catch (e) {
+    res.status(404).send();
+  }
 }
 
 exports.registerPage = async (req,res) => {

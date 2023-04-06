@@ -44,7 +44,7 @@ const bicycleSchema = new mongoose.Schema( {
     }
   },
   image: { 
-    type: String,
+    type: Buffer,
   }
 });
 

@@ -6,7 +6,7 @@ exports.storeBicycle = async (req,res) => {
   try {
     console.log(req.body);
     const bicycle = new Bicycle(req.body);
-    console.log(bicycle);
+    // console.log(bicycle);
     await bicycle.save();
     return res.status(201).json({ success: true, bicycle});
   }
@@ -19,9 +19,17 @@ exports.storeBicycle = async (req,res) => {
 exports.editBicycleWeb = async (req,res) => {
   try {
     const bicycle = await Bicycle.findById(req.params.id);
+    let imageSrc = '';
+
+    if (bicycle && bicycle.image) {
+      
+      const imageData = bicycle.image;
+      const base64Image = imageData.toString('base64');
+      imageSrc = `data:image/png;base64,${base64Image}`;
+    }
     const categories = await Category.find({});
     // console.log(category);
-    return res.render('membersEditItem', { bicycle, categories })
+    return res.render('membersEditItem', { bicycle, categories, imageSrc: imageSrc })
   }
   catch(e) {
     console.log(e.message);

@@ -4,7 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
 
-const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCommentsPage, membersCategoriesPage, membersUsersPage, categoriesPost, categoriesDelete, registerPage, logoutAction, membersAddItemPage, membersAddItem } = require('../controller/user');
+const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCommentsPage, membersCategoriesPage, membersUsersPage, categoriesPost, categoriesDelete, registerPage, logoutAction, membersAddItemPage, membersAddItem, getImage } = require('../controller/user');
 
 const { deleteBicycle, editBicycleWeb, editBicycle } = require('../controller/bicycle');
 
@@ -94,13 +94,19 @@ router.delete('/members/posts/:id', deleteBicycle);
 
 router.get('/members/posts/add', membersAddItemPage);
 
+const storage = multer.memoryStorage();
 const upload = multer({
-  dest: 'images'
+  storage: storage
+  // dest: 'images'
 })
 
-router.post('/members/posts/add', upload.single('upload'),membersAddItem);
+router.post('/members/posts/add', upload.single('image'),membersAddItem);
+
+router.get('/members/posts/:id/image', getImage);
 
 router.get('/members/posts/:id', editBicycleWeb);
+
+
 
 
 router.patch('/members/posts/:id', checkAuthenticated, editBicycle);
