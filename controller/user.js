@@ -156,7 +156,10 @@ exports.membersAddItem = async (req, res) => {
   try {
    
     // const bicycle = new Bicycle(req.body);\
-    const buffer = await sharp(req.file.buffer).resize(800, 800, { fit: 'inside', withoutEnlargement: true }).png().toBuffer();
+    
+    // const buffer = await sharp(req.file.buffer).resize(800, 800, { fit: 'inside', withoutEnlargement: true }).png().toBuffer();
+    // console.log(req.file);
+    images = req.file.filename;
 
 
     const bicycle = new Bicycle( 
@@ -169,7 +172,7 @@ exports.membersAddItem = async (req, res) => {
         description: req.body.description,
         price: req.body.price,
         discount_percentage: req.body.discount_percentage,
-        image: buffer
+        image: images
       },
       {
       new: true,

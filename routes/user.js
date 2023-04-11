@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
+const path = require('path');
 
 const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCommentsPage, membersCategoriesPage, membersUsersPage, categoriesPost, categoriesDelete, registerPage, logoutAction, membersAddItemPage, membersAddItem, getImage } = require('../controller/user');
 
@@ -94,10 +95,26 @@ router.delete('/members/posts/:id', deleteBicycle);
 
 router.get('/members/posts/add', membersAddItemPage);
 
-const storage = multer.memoryStorage();
+// const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+  // Choose a destination
+    destination: function (req, file, cb) {
+  // Lets store them in the uploads folder
+      cb(null, "./public/images/")
+    },
+  // Choose a filename for each uploaded image
+    filename: function (req, file, cb) {
+  // Lets create a unique name for each image
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, uniqueSuffix + path.extname(file.originalname))
+    }
+  })
+
+
 const upload = multer({
-  storage: storage
-  // dest: 'images'
+  storage: storage,
+  limits: { fileSize: 1000000 }
+  // dest: 'images',
 })
 
 router.post('/members/posts/add', upload.single('image'),membersAddItem);
