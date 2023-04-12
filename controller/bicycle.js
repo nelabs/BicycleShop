@@ -19,17 +19,17 @@ exports.storeBicycle = async (req,res) => {
 exports.editBicycleWeb = async (req,res) => {
   try {
     const bicycle = await Bicycle.findById(req.params.id);
-    let imageSrc = '';
+    // let imageSrc = '';
 
-    if (bicycle && bicycle.image) {
+    // if (bicycle && bicycle.image) {
       
-      const imageData = bicycle.image;
-      const base64Image = imageData.toString('base64');
-      imageSrc = `data:image/png;base64,${base64Image}`;
-    }
+    //   const imageData = bicycle.image;
+    //   const base64Image = imageData.toString('base64');
+    //   imageSrc = `data:image/png;base64,${base64Image}`;
+    // }
     const categories = await Category.find({});
     // console.log(category);
-    return res.render('membersEditItem', { bicycle, categories, imageSrc: imageSrc })
+    return res.render('membersEditItem', { bicycle, categories })
   }
   catch(e) {
     console.log(e.message);

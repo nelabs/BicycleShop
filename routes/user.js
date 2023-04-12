@@ -117,7 +117,7 @@ const upload = multer({
   // dest: 'images',
 })
 
-router.post('/members/posts/add', upload.single('image'),membersAddItem);
+router.post('/members/posts/add', upload.array('image', 12),membersAddItem);
 
 router.get('/members/posts/:id/image', getImage);
 
