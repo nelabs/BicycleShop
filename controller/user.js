@@ -165,7 +165,6 @@ exports.membersAddItem = async (req, res) => {
       req.files.forEach((file) => {
         images.push(file.filename)
       });
-
     }
     console.log(images);
 
@@ -217,6 +216,26 @@ exports.getImage = async (req,res) => {
 
   } catch (e) {
     res.status(404).send();
+  }
+}
+
+exports.deleteImage = async (req, res) => {
+  // Create an array with the images the user wants to delete
+  const deleteImages = req.body.deleteImages // mulitmedia object coming from the frontend
+
+  // If the array is empty
+  if (deleteImages == ""){
+    // ...the user didn't select an image/s to delete
+    res.statusMessage = "Please select an image to delete";
+    res.status(400).send()
+  // Else the array in not empty
+  } else {
+    // ...delete each of the selected images from the uploads folder
+    deleteImages.forEach( image => {
+      unlinkFile("./public/images/" + image);
+    })
+    res.statusMessage = "Succesfully deleted";
+    res.status(200).send()
   }
 }
 

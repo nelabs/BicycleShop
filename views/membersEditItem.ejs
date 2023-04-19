@@ -39,11 +39,12 @@
       </div>
       <% if (bicycle.image) { %>
        <% for (let image of bicycle.image) { %>
-      <div class="form-group">
+        <div class="image">
         
       <img src="../../images/<%= image %>" alt="Bicycle Image" width="400"/>
-      <p><%= image %></p>
+      <span onclick="deleteSavedImage(0)">&times;</span>
       </div>
+      <p><%= image %></p>
       <%  } %>
       <% } %>
  
@@ -63,5 +64,6 @@
   </div>
 
   <script src="/js/script.js"></script>
+  <script src="/js/addimages.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
 const path = require('path');
 
-const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCommentsPage, membersCategoriesPage, membersUsersPage, categoriesPost, categoriesDelete, registerPage, logoutAction, membersAddItemPage, membersAddItem, getImage } = require('../controller/user');
+const { storeUser, login, loginPage, membersPage, membersPostsPage, membersCommentsPage, membersCategoriesPage, membersUsersPage, categoriesPost, categoriesDelete, registerPage, logoutAction, membersAddItemPage, membersAddItem, getImage, deleteImage } = require('../controller/user');
 
 const { deleteBicycle, editBicycleWeb, editBicycle } = require('../controller/bicycle');
 
@@ -118,6 +118,8 @@ const upload = multer({
 })
 
 router.post('/members/posts/add', upload.array('image', 12),membersAddItem);
+
+router.put('/members/posts/:id/deleteimg', checkAuthenticated,deleteImage);
 
 router.get('/members/posts/:id/image', getImage);
 
