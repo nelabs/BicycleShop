@@ -2,6 +2,24 @@ const output = document.querySelector("#outputField")
 const input = document.querySelector("#formFile")
 let imagesArray = []
 
+$(document).ready(function() {
+  $('#delete-link').click(function(event) {
+    event.preventDefault();
+    
+    $.ajax({
+      method: 'PUT',
+      url: $(this).attr('href'),
+      success: function(response) {
+        console.log('Request successful:', response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error('Request failed:', errorThrown);
+      }
+    });
+  });
+});
+
+
 input.addEventListener("change", () => {
   const files = input.files
   for (let i = 0; i < files.length; i++) {
@@ -25,6 +43,8 @@ function displayImages() {
 function deleteImage(index) {
   imagesArray.splice(index, 1)
   displayImages()
+  
+
 }
 
 savedForm.addEventListener("submit", (e) => {

@@ -42,6 +42,7 @@
         <div class="image">
         
       <img src="../../images/<%= image %>" alt="Bicycle Image" width="400"/>
+      <a href="/members/posts/<%=bicycle._id%>/delete/<%= image %>" id="delete-link">delete</a>
       <span onclick="deleteSavedImage(0)">&times;</span>
       </div>
       <p><%= image %></p>

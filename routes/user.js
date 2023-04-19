@@ -119,7 +119,7 @@ const upload = multer({
 
 router.post('/members/posts/add', upload.array('image', 12),membersAddItem);
 
-router.put('/members/posts/:id/deleteimg', checkAuthenticated,deleteImage);
+router.put('/members/posts/:id/delete/:img', checkAuthenticated,deleteImage);
 
 router.get('/members/posts/:id/image', getImage);
 

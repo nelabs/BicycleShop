@@ -5,6 +5,7 @@ const Category = require('../model/Category');
 const Comment = require('../model/Comment');
 const mongoose = require('mongoose');
 const sharp = require('sharp');
+const fs = require('fs');
 
 
 
@@ -221,21 +222,25 @@ exports.getImage = async (req,res) => {
 
 exports.deleteImage = async (req, res) => {
   // Create an array with the images the user wants to delete
-  const deleteImages = req.body.deleteImages // mulitmedia object coming from the frontend
-
+  // const deleteImages = req.body.img // mulitmedia object coming from the frontend
+  const img = req.params.img;
+  console.log(img);
+  
   // If the array is empty
-  if (deleteImages == ""){
+  if (img == ""){
     // ...the user didn't select an image/s to delete
     res.statusMessage = "Please select an image to delete";
-    res.status(400).send()
+    res.status(400).end()
   // Else the array in not empty
   } else {
     // ...delete each of the selected images from the uploads folder
-    deleteImages.forEach( image => {
-      unlinkFile("./public/images/" + image);
-    })
+    // deleteImages.forEach( image => {
+      fs.unlinkSync("./public/images/" + img);
+
+      //need to remove also from DB
+    // })
     res.statusMessage = "Succesfully deleted";
-    res.status(200).send()
+    res.status(200).end()
   }
 }
 
