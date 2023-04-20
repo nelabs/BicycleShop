@@ -225,7 +225,15 @@ exports.deleteImage = async (req, res) => {
   // const deleteImages = req.body.img // mulitmedia object coming from the frontend
   const img = req.params.img;
   console.log(img);
-  
+  const bicycle = await Bicycle.findById(req.params.id)
+  console.log(bicycle.image);
+  imageArr = bicycle.image;
+  var index = imageArr.indexOf(img);
+
+  if (index !== -1) {
+    imageArr.splice(index, 1);
+  }
+  console.log(imageArr);
   // If the array is empty
   if (img == ""){
     // ...the user didn't select an image/s to delete
@@ -235,7 +243,28 @@ exports.deleteImage = async (req, res) => {
   } else {
     // ...delete each of the selected images from the uploads folder
     // deleteImages.forEach( image => {
-      fs.unlinkSync("./public/images/" + img);
+      const imagePath = "./public/images/" + img;
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync("./public/images/" + img);
+        const bicycle = await Bicycle.findByIdAndUpdate(req.params.id, 
+          {
+            $set: {
+              "image": imageArr
+            },
+            // name: req.body.name,
+          },
+          {
+          new: true,
+          runValidators: true
+        });
+     
+        req.flash('success', 'Picture has been deleted');
+        
+      } else {
+        res.statusMessage = "Image does not exist";
+        res.status(400).end()
+      }
+     
 
       //need to remove also from DB
     // })

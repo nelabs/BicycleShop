@@ -20,13 +20,13 @@ $(document).ready(function() {
 });
 
 
-input.addEventListener("change", () => {
-  const files = input.files
-  for (let i = 0; i < files.length; i++) {
-    imagesArray.push(files[i])
-  }
-  displayImages()
-})
+// input.addEventListener("change", () => {
+//   const files = input.files
+//   for (let i = 0; i < files.length; i++) {
+//     imagesArray.push(files[i])
+//   }
+//   displayImages()
+// })
 
 
 function displayImages() {
@@ -47,12 +47,12 @@ function deleteImage(index) {
 
 }
 
-savedForm.addEventListener("submit", (e) => {
-  // prevent the form from submitting
-  e.preventDefault()
-  // call on the deleteImagesFromServer function
-  deleteImagesFromServer()
-});
+// savedForm.addEventListener("submit", (e) => {
+//   // prevent the form from submitting
+//   e.preventDefault()
+//   // call on the deleteImagesFromServer function
+//   deleteImagesFromServer()
+// });
 
 function deleteImagesFromServer() {
   // Make a fetch request to the server with the deleteImages array in the body
